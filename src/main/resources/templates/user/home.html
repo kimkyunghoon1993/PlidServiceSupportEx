@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+시작
+<tr th:each="userList : ${userList}">
+    <td th:text="${userList.getNo()}">username</td>
+    <td th:text="${userList.getName()}">username</td>
+    <td th:text="${userList.getEmail()}">useremail</td>
+</tr>
+</body>
+</html>

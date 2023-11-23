@@ -4,6 +4,5 @@
 <configuration>
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
-<!--        <setting name="jdbcTypeForNull" value="VARCHAR" />  오라클 사용시 필요하다-->
     </settings>
 </configuration>

@@ -18,7 +18,7 @@ public class UserService {
 
     private final UserMapper userMapper;
 
-    public List<UserVo> MemberService(UserVo userVo){
+    public List<UserVo> getUserList(){
         return userMapper.getUserList();
     }
 

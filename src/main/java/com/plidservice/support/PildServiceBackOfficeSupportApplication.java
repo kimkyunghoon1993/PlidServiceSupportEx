@@ -18,7 +18,7 @@ public class PildServiceBackOfficeSupportApplication {
     @Bean
     CommandLineRunner init(){
         return (String[] args) -> {
-            log.info("PlidServiceSupport server Start!");
+            log.info("필드서비스 서포터 서버 실행 완료!");
         };
     }
 }

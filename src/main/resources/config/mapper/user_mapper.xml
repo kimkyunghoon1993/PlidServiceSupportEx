@@ -2,6 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.plidservice.support.mapper.UserMapper">
     <select id="getUserList" resultType="com.plidservice.support.vo.UserVo">
-        select * from MEMBER;
+        SELECT NO,NAME,PASSWORD,EMAIL FROM MEMBER;
     </select>
 </mapper>

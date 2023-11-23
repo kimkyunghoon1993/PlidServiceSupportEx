@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block th:fragment="frontMenu">
+    <!-- Navbar Vertical -->
+    <aside class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered bg-white  ">
+        <div class="navbar-vertical-container">
+            <div class="navbar-vertical-footer-offset">
+                <!-- Logo -->
+                <a class="navbar-brand" aria-label="Front">
+                    <img class="navbar-brand-logo" th:src="@{/pild/assets/img/pild/logo.png}" alt="Logo" data-hs-theme-appearance="default">
+                    <img class="navbar-brand-logo" th:src="@{/pild/assets/img/pild/logo-light.png}" alt="Logo" data-hs-theme-appearance="dark">
+                    <img class="navbar-brand-logo-mini" th:src="@{/pild/assets/img/pild/logo-short.png}" alt="Logo" data-hs-theme-appearance="default">
+                    <img class="navbar-brand-logo-mini" th:src="@{/pild/assets/img/pild/logo-light-short.png}" alt="Logo" data-hs-theme-appearance="dark">
+                </a>
+                <!-- End Logo -->
+
+                <!-- Navbar Vertical Toggle -->
+                <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
+                    <i class="bi-arrow-bar-left navbar-toggler-short-align" id="navBarCollapseIcon"
+                       data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
+                       data-bs-toggle="tooltip" data-bs-placement="right" title="Collapse"></i>
+                    <i class="bi-arrow-bar-right navbar-toggler-full-align"
+                       data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
+                       data-bs-toggle="tooltip" data-bs-placement="right" title="Expand"></i>
+                </button>
+
+                <!-- End Navbar Vertical Toggle -->
+
+                <!-- Content -->
+                <div class="navbar-vertical-content">
+                    <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
+
+                        <span class="dropdown-header">Menu</span>
+                        <small class="bi-three-dots nav-subtitle-replacer"></small>
+
+                        <!-- Collapse -->
+                        <div class="navbar-nav nav-compact">
+
+                        </div>
+                        <div id="navbarVerticalMenuPagesMenu">
+                            <!-- Collapse -->
+                            <div class="nav-item"
+                                 sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS', 'ROLE_TERMADM')">
+                                <a class="nav-link dropdown-toggle" href="#navbarVerticalMenuPagesMenuParcel"
+                                   role="button" data-bs-toggle="collapse"
+                                   data-bs-target="#navbarVerticalMenuPagesMenuParcel"
+                                   aria-controls="navbarVerticalMenuPagesMenuParcel">
+                                    <i class="bi-truck nav-icon"></i>
+                                    <span class="nav-link-title">택배사</span>
+                                </a>
+
+                                <div id="navbarVerticalMenuPagesMenuParcel" class="nav-collapse collapse"
+                                     data-bs-parent="#navbarVerticalMenuPagesMenu">
+                                    <a class="nav-link" id="navbarVerticalMenuParcelParcelTag"
+                                       sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS')"
+                                       th:href='@{/view/parcel/parcel/}'>택배사</a>
+                                    <a class="nav-link " id="navbarVerticalMenuParcelAgencyTag"
+                                       sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS', 'ROLE_TERMADM')"
+                                       th:href='@{/view/parcel/agency/}'>대리점</a>
+                                    <a class="nav-link " id="navbarVerticalMenuParcelSmTag"
+                                       sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS', 'ROLE_TERMADM')"
+                                       th:href='@{/view/parcel/sm/}'>SM</a>
+                                </div>
+                            </div>
+                            <!-- End Collapse -->
+
+                            <!-- Collapse -->
+                            <div class="nav-item"
+                                 sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS', 'ROLE_TERMADM', 'ROLE_CENTERADM')">
+                                <a class="nav-link dropdown-toggle" href="#navbarVerticalMenuPagesMenuTerminal"
+                                   role="button" data-bs-toggle="collapse"
+                                   data-bs-target="#navbarVerticalMenuPagesMenuTerminal"
+                                   aria-controls="navbarVerticalMenuPagesMenuTerminal">
+                                    <i class="bi-house-door nav-icon"></i>
+                                    <span class="nav-link-title">터미널</span>
+                                </a>
+
+                                <div id="navbarVerticalMenuPagesMenuTerminal" class="nav-collapse collapse"
+                                     data-bs-parent="#navbarVerticalMenuPagesMenu">
+                                    <a class="nav-link " id="navbarVerticalMenuPagesMenuTerminalTerminalTag"
+                                       sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS')"
+                                       th:href='@{/view/terminal/terminal/}'>터미널</a>
+                                    <a class="nav-link " id="navbarVerticalMenuPagesMenuTerminalCenterTag"
+                                       sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS', 'ROLE_TERMADM')"
+                                       th:href='@{/view/terminal/center/}'>마당발 센터</a>
+                                    <a class="nav-link " id="navbarVerticalMenuPagesMenuTerminalWalkerTag"
+                                       sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS', 'ROLE_TERMADM', 'ROLE_CENTERADM')"
+                                       th:href='@{/view/terminal/walker/}'>워커</a>
+                                    <a class="nav-link " id="navbarVerticalMenuPagesMenuTerminalDriverTag"
+                                       sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS', 'ROLE_TERMADM', 'ROLE_CENTERADM')"
+                                       th:href='@{/view/terminal/driver/}'>필드 참여자</a>
+                                </div>
+                            </div>
+                            <!-- End Collapse -->
+
+                            <!-- Collapse -->
+                            <div class="nav-item"
+                                 sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS', 'ROLE_TERMADM', 'ROLE_CENTERADM', 'ROLE_OUTSOURCADM')">
+                                <a class="nav-link dropdown-toggle" href="#navbarVerticalMenuPagesMenuManual"
+                                   role="button" data-bs-toggle="collapse"
+                                   data-bs-target="#navbarVerticalMenuPagesMenuManual"
+                                   aria-controls="navbarVerticalMenuPagesMenuManual">
+                                    <i class="bi-card-checklist nav-icon"></i>
+                                    <span class="nav-link-title">수동배송처리</span>
+                                </a>
+
+                                <div id="navbarVerticalMenuPagesMenuManual" class="nav-collapse collapse"
+                                     data-bs-parent="#navbarVerticalMenuPagesMenu">
+                                    <a class="nav-link " id="navbarVerticalMenuPagesMenuManualUploadTag"
+                                       sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS', 'ROLE_TERMADM')"
+                                       th:href='@{/view/manual/upload/}'>운송장 업로드</a>
+                                    <a class="nav-link " id="navbarVerticalMenuPagesMenuManualIntegrationTag"
+                                       sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS', 'ROLE_TERMADM')"
+                                       th:href='@{/view/manual/integration}'>운송장 통합</a>
+                                    <a class="nav-link " id="navbarVerticalMenuPagesMenuManualManualTag"
+                                       sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS', 'ROLE_TERMADM')"
+                                       th:href='@{/view/manual/manual/}'>수동운송장</a>
+                                    <a class="nav-link " id="navbarVerticalMenuPagesMenuManualDailyTag"
+                                       sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS', 'ROLE_TERMADM', 'ROLE_CENTERADM')"
+                                       th:href='@{/view/manual/daily/}'>일별 처리내역</a>
+                                    <a class="nav-link " id="navbarVerticalMenuPagesMenuManualDailyWalkerTag"
+                                       sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS', 'ROLE_TERMADM', 'ROLE_CENTERADM')"
+                                       th:href='@{/view/manual/daily/walker/}'>일별 워커 처리내역</a>
+                                    <a class="nav-link " id="navbarVerticalMenuPagesMenuManualMonthlyTag"
+                                       sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS', 'ROLE_TERMADM', 'ROLE_CENTERADM')"
+                                       th:href='@{/view/manual/monthly/}'>월별 처리내역</a>
+                                    <a class="nav-link " id="navbarVerticalMenuPagesMenuManualMonthlyWalkerTag"
+                                       sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS', 'ROLE_TERMADM', 'ROLE_CENTERADM')"
+                                       th:href='@{/view/manual/monthly/walker/}'>월별 워커 처리내역</a>
+                                    <!-- 외주 화면 -->
+                                    <a class="nav-link " id="navbarVerticalMenuPagesMenuManualOutsourcingWorkTag"
+                                       sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_CENTERADM', 'ROLE_OUTSOURCADM')"
+                                       th:href='@{/view/out/manual/work/}'>운송장 정보입력</a>
+                                </div>
+                            </div>
+                            <!-- End Collapse -->
+
+                            <div class="nav-item"
+                                 sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS', 'ROLE_TERMADM', 'ROLE_CENTERADM')">
+                                <a id="navbarVerticalMenuAssetsTag" class="nav-link " data-placement="left"
+                                   th:href='@{/assets/}'>
+                                    <i class="bi-cash-coin nav-icon"></i>
+                                    <span class="nav-link-title">현장 자산</span>
+                                </a>
+                            </div>
+
+                            <div class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_HEADQUARTERS')">
+                                <a id="navbarVerticalMenuAdminTag" class="nav-link " data-placement="left"
+                                   th:href='@{/manage/admin/}'>
+                                    <i class="bi-key nav-icon"></i>
+                                    <span class="nav-link-title">계정 권한</span>
+                                </a>
+                            </div>
+
+                            <div class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                                <a id="navbarVerticalMenuAppTag" class="nav-link " data-placement="left"
+                                   th:href='@{/app/}'>
+                                    <i class="bi-app-indicator nav-icon"></i>
+                                    <span class="nav-link-title">앱 버전</span>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- End Collapse -->
+
+                    </div>
+
+                </div>
+                <!-- End Content -->
+
+                <!-- Footer -->
+                <div class="navbar-vertical-footer">
+                    <ul class="navbar-vertical-footer-list">
+                        <li class="navbar-vertical-footer-list-item">
+                            <!-- Style Switcher -->
+                            <div class="dropdown dropup">
+                                <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle"
+                                        id="selectThemeDropdown" data-bs-toggle="dropdown" aria-expanded="false"
+                                        data-bs-dropdown-animation>
+
+                                </button>
+
+                                <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless"
+                                     aria-labelledby="selectThemeDropdown">
+                                    <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">
+                                        <i class="bi-moon-stars me-2"></i>
+                                        <span class="text-truncate"
+                                              title="Auto (system default)">Auto (system default)</span>
+                                    </a>
+                                    <a class="dropdown-item" href="#" data-icon="bi-brightness-high"
+                                       data-value="default">
+                                        <i class="bi-brightness-high me-2"></i>
+                                        <span class="text-truncate"
+                                              title="Default (light mode)">Default (light mode)</span>
+                                    </a>
+                                    <a class="dropdown-item active" href="#" data-icon="bi-moon" data-value="dark">
+                                        <i class="bi-moon me-2"></i>
+                                        <span class="text-truncate" title="Dark">Dark</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- End Style Switcher -->
+                        </li>
+
+                        <li class="navbar-vertical-footer-list-item">
+                            <!-- Style Switcher -->
+                            <div class="dropdown dropup">
+                                <a class="navbar-dropdown-account-wrapper" href="javascript:;"
+                                   id="accountNavbarDropdown"
+                                   data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside"
+                                   data-bs-dropdown-animation>
+                                    <div class="avatar avatar-sm avatar-circle">
+                                        <img class="avatar-img" th:src="@{/pild/assets/img/160x160/img1.jpg}"
+                                             alt="Image Description">
+                                        <span class="avatar-status avatar-sm-status avatar-status-success"></span>
+                                    </div>
+                                </a>
+
+                                <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless"
+                                     aria-labelledby="accountNavbarDropdown" style="width: 16rem;">
+                                    <div class="dropdown-item-text">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar avatar-sm avatar-circle">
+                                                <img class="avatar-img" th:src="@{/pild/assets/img/160x160/img1.jpg}"
+                                                     alt="Image Description">
+                                            </div>
+                                            <div class="flex-grow-1 ms-3">
+                                                <h5 class="mb-0"><span
+                                                        th:text="|${#authentication.principal.userName} 님|"></span></h5>
+                                                <p class="card-text text-body"><span
+                                                        th:text="|${#authentication.principal.emailAddress}|"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="dropdown-divider"></div>
+
+                                    <a class="dropdown-item" href="javascript:changePasswordModalShow()">비밀번호 변경</a>
+                                    <a class="dropdown-item" th:href='@{/logout}'>로그아웃</a>
+                                </div>
+                            </div>
+
+                            <!-- End Style Switcher -->
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- End Footer -->
+            </div>
+        </div>
+    </aside>
+</th:block>

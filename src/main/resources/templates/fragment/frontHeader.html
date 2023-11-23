@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="frontHeader">
+    <!-- ========== HEADER ========== -->
+
+    <!-- ========== END HEADER ========== -->
+
+    <!-- 모달창 띄우는 버튼 (changePasswordModal) -->
+    <button style="display: none" id="changePasswordModalButton" type="button" class="btn btn-primary"
+            data-bs-toggle="modal" data-bs-target="#changePasswordModal"></button>
+    <!-- Modal -->
+    <div id="changePasswordModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">비밀번호 변경</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="originPassword" class="form-label">기존 비밀번호</label>
+                        <div class="input-group input-group-merge">
+                            <input type="password" class="form-control" id="originPassword"
+                                   oninput="inputOriginPassword()">
+                        </div>
+                        <p id="originPasswordErrorText"></p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">새 비밀번호</label>
+                        <div class="input-group input-group-merge">
+                            <input type="password" class="form-control" id="newPassword">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPasswordAgain" class="form-label">새 비밀번호 확인</label>
+                        <div class="input-group input-group-merge">
+                            <input type="password" class="form-control" id="newPasswordAgain"
+                                   oninput="inputNewPasswordAgain()">
+                        </div>
+                        <p id="newPasswordErrorText"></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="changePassword()">비밀번호 변경</button>
+                    <button id="changePasswordModalCancelButton" type="button" class="btn btn-white"
+                            data-bs-dismiss="modal">취소
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+
+    <script th:inline="javascript">
+
+        function changePasswordModalClear() {
+            $('#originPassword').val('');
+            $('#newPassword').val('');
+            $('#newPasswordAgain').val('');
+        }
+
+        function changePasswordModalShow() {
+            changePasswordModalClear();
+            $('#changePasswordModalButton').click();
+        }
+
+        function changePassword() {
+            const userId = '[[${#authentication.principal.username}]]';
+            const originPassword = document.getElementById('originPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const newPasswordAgain = document.getElementById('newPasswordAgain').value;
+
+            if (originPassword === '') {
+                alert('기존 비밀번호를 입력하세요.');
+                return;
+            } else if (newPassword === '') {
+                alert('새 비밀번호를 입력하세요.');
+                return;
+            } else if (newPasswordAgain === '') {
+                alert('새 비밀번호 확인을 입력하세요.');
+                return;
+            } else if (newPassword !== newPasswordAgain) {
+                alert('새 비밀번호와 새 비밀번호 확인이 맞지 않습니다.');
+                return;
+            }
+
+            modifyPassword(userId, originPassword, newPassword);
+        }
+
+        function modifyPassword(userId, originPassword, newPassword) {
+            const item = {
+                'userId': userId,
+                'userPassword': originPassword,
+                'userNewPassword': newPassword,
+            };
+
+            $.ajax({
+                type: 'patch',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                url: "/password",
+                data: JSON.stringify(item),
+                success: function (data) {
+                    if (data.resultCode === "SUCCESS") {
+                        alert('비밀번호 변경이 완료 되었습니다.');
+                        window.location.href = '/logout';
+                    } else {
+                        alert('기존 비밀번호가 맞지 않습니다.');
+                    }
+                }
+            });
+        }
+
+        function inputNewPasswordAgain() {
+            const text = '새 비밀번호가 일치하지 않습니다.';
+
+            if (document.getElementById('new_password').value === '' || document.getElementById('new_password').value === document.getElementById('new_password_again').value) {
+                document.getElementById('newPasswordErrorText').innerHTML = '';
+            } else if (document.getElementById('new_password').value !== document.getElementById('new_password_again').value) {
+                document.getElementById('newPasswordErrorText').innerHTML = text;
+            }
+        }
+    </script>
+</th:block>

@@ -6,6 +6,9 @@ server:
       enabled: true
       force: true
 spring:
+  devtools:
+    livereload:
+      enabled: true
   h2:
     console:
       enabled: true
@@ -26,9 +29,16 @@ spring:
 
 
 
-
 mybatis:
-  config-location: "classpath:config/mybatis-config.xml"
-  mapper-locations: "classpath*:config/mapper/*.mapper.xml"
+  mapper-locations: config/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      plidservice:
+        support:
+          mapper=TRACE:
 
 
